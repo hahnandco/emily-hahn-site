@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /index.v1-gold-terra.html
+Disallow: /solo.html
+Disallow: /docs/

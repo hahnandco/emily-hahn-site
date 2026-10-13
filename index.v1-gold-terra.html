@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Emily Hahn, Personal Assistant</title>
+<meta name="description" content="Intuitive, authentic personal assistant in Austin, Texas. Errands, organizing, schedules and the to-do list you keep carrying around.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap">
+<style>
+/* Layout: one sunny scroll — chaos board hero, then plates, steps, packages, words, fine print, hello. */
+:root {
+  --forest: #1F4A3A;
+  --moss: #3E7A5A;
+  --sage: #DCE6D2;
+  --paper: #F4F6EE;
+  --gold: #E3A83A;
+  --gold-soft: #F7DFA6;
+  --terra: #C65F3C;
+  --terra-soft: #F2CDBC;
+  --ink: #18241E;
+  --muted: #4E5E55;
+  --white: #FFFFFF;
+  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body: "Figtree", "Helvetica Neue", system-ui, sans-serif;
+  --hand: "Caveat", "Bradley Hand", cursive;
+  --r: 18px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--body); }
+img { max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.05; text-wrap: balance; margin: 0; letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 4.6vw, 3.25rem); font-weight: 800; }
+h3 { font-size: 1.3rem; font-weight: 700; }
+p { margin: 0; }
+.eyebrow { font: 700 0.78rem/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--terra); }
+.hand { font-family: var(--hand); font-weight: 700; }
+
+/* nav */
+header.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid color-mix(in srgb, var(--forest) 12%, transparent); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.logo { font: 800 1.35rem/1 var(--display); color: var(--forest); text-decoration: none; display: flex; align-items: baseline; gap: 6px; }
+.logo span { font: 700 1.35rem/1 var(--hand); color: var(--terra); }
+.nav nav { display: flex; gap: 22px; align-items: center; }
+.nav nav a { text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--muted); }
+.nav nav a:hover { color: var(--forest); }
+.btn { display: inline-flex; align-items: center; gap: 8px; border: 0; cursor: pointer; text-decoration: none; font: 700 1rem/1 var(--body); padding: 14px 22px; border-radius: 999px; transition: transform .15s ease, box-shadow .15s ease, background .15s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-gold { background: var(--gold); color: var(--ink); box-shadow: 0 4px 0 #B9801F; }
+.btn-gold:hover { box-shadow: 0 6px 0 #B9801F; }
+.btn-ghost { background: transparent; color: var(--white); border: 2px solid color-mix(in srgb, var(--white) 55%, transparent); }
+.btn-small { padding: 10px 16px; font-size: 0.9rem; }
+@media (max-width: 760px) { .nav nav a:not(.btn) { display: none; } }
+
+/* hero */
+.hero { background: var(--forest); color: var(--white); position: relative; overflow: hidden; }
+.hero::after { content: ""; position: absolute; right: -120px; bottom: -160px; width: 420px; height: 420px; border-radius: 50%; background: var(--terra); opacity: .9; z-index: 0; }
+.hero .wrap { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding-block: 72px 88px; }
+.hero h1 { font-size: clamp(2.6rem, 6.4vw, 4.9rem); font-weight: 800; }
+.hero h1 em { font-style: normal; color: var(--gold); position: relative; white-space: nowrap; }
+.hero h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0.04em; height: 0.14em; background: var(--terra); border-radius: 4px; z-index: -1; }
+.hero .lede { margin-top: 22px; font-size: 1.2rem; max-width: 34ch; color: color-mix(in srgb, var(--white) 86%, var(--forest)); }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+.hero .where { margin-top: 26px; font-size: 0.92rem; color: color-mix(in srgb, var(--white) 70%, var(--forest)); }
+.words3 { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.chip { font: 700 0.8rem/1 var(--body); letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 12px; border-radius: 999px; }
+.chip-gold { background: var(--gold); color: var(--ink); }
+.chip-terra { background: var(--terra); color: var(--white); }
+.chip-sage { background: var(--sage); color: var(--forest); }
+
+/* chaos board */
+.board-wrap { min-width: 0; }
+.board { position: relative; height: 420px; background: var(--paper); border-radius: 26px; box-shadow: 0 24px 60px rgba(0,0,0,.25); overflow: hidden; }
+.board .col-head { position: absolute; top: 4%; width: 29%; text-align: center; font: 800 0.8rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--forest); opacity: 0; transform: translateY(-6px); transition: opacity .4s ease .35s, transform .4s ease .35s; }
+.board .col-head::after { content: ""; display: block; height: 3px; border-radius: 3px; margin: 8px auto 0; width: 40%; background: var(--c, var(--gold)); }
+.note { position: absolute; width: 29%; padding: 10px 12px; border-radius: 10px; font: 700 1.2rem/1.1 var(--hand); color: var(--ink); background: var(--bg, var(--gold-soft)); box-shadow: 0 6px 14px rgba(24,36,30,.16); left: var(--cx); top: var(--cy); transform: rotate(var(--cr)); transition: left .7s cubic-bezier(.6,.05,.2,1.2), top .7s cubic-bezier(.6,.05,.2,1.2), transform .7s cubic-bezier(.6,.05,.2,1.2); transition-delay: var(--d, 0s); }
+.note s { text-decoration-thickness: 2px; text-decoration-color: transparent; transition: text-decoration-color .3s ease 1s; }
+.board.sorted .note { left: var(--sx); top: var(--sy); transform: rotate(0deg); }
+.board.sorted .note s { text-decoration-color: var(--moss); }
+.board.sorted .col-head { opacity: 1; transform: none; }
+.board .status { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font: 700 1.35rem/1 var(--hand); color: var(--terra); transition: opacity .3s; }
+.board-ctl { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+.board-ctl p { font-size: 0.92rem; color: color-mix(in srgb, var(--white) 75%, var(--forest)); }
+.toggle { background: var(--white); color: var(--forest); box-shadow: 0 4px 0 var(--sage); }
+@media (max-width: 900px) {
+  .hero .wrap { grid-template-columns: 1fr; padding-block: 48px 64px; }
+  .board { height: 380px; }
+  .note { font-size: 1.02rem; padding: 8px 8px; }
+}
+@media (max-width: 420px) { .note { font-size: 0.92rem; } .board { height: 360px; } }
+
+/* sections */
+section { padding-block: 96px; }
+.head { display: grid; gap: 14px; max-width: 720px; margin-bottom: 44px; }
+.head p { color: var(--muted); font-size: 1.12rem; }
+
+/* pressure */
+.pressure { background: var(--paper); }
+.pressure .grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+.pressure blockquote { margin: 0; font: 800 clamp(2.2rem, 5vw, 3.6rem)/1.02 var(--display); letter-spacing: -0.03em; color: var(--forest); }
+.pressure blockquote span { color: var(--terra); }
+.pressure .copy { display: grid; gap: 18px; font-size: 1.12rem; color: var(--muted); }
+.pressure .copy strong { color: var(--ink); }
+.sig { font: 700 2rem/1 var(--hand); color: var(--terra); }
+@media (max-width: 820px) { .pressure .grid { grid-template-columns: 1fr; gap: 28px; } }
+
+/* plates */
+.plates { background: var(--sage); }
+.plate-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.plate { background: var(--white); border-radius: var(--r); padding: 26px; display: grid; gap: 10px; align-content: start; transition: transform .2s ease; }
+.plate:hover { transform: translateY(-4px) rotate(-0.4deg); }
+.plate .ico { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--c); color: var(--white); }
+.plate .ico svg { width: 24px; height: 24px; }
+.plate p { color: var(--muted); font-size: 0.98rem; }
+.plate .tag { font: 700 1.2rem/1 var(--hand); color: var(--terra); }
+@media (max-width: 900px) { .plate-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .plate-grid { grid-template-columns: 1fr; } }
+
+/* why */
+.why { background: var(--forest); color: var(--white); }
+.why .head p { color: color-mix(in srgb, var(--white) 78%, var(--forest)); }
+.why .eyebrow { color: var(--gold); }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 2px solid color-mix(in srgb, var(--white) 18%, transparent); }
+.trio > div { padding: 30px 28px 6px 0; display: grid; gap: 12px; }
+.trio > div + div { padding-left: 28px; border-left: 2px solid color-mix(in srgb, var(--white) 18%, transparent); }
+.trio h3 { font-size: 2rem; font-weight: 800; }
+.trio > div:nth-child(1) h3 { color: var(--gold); }
+.trio > div:nth-child(2) h3 { color: var(--terra-soft); }
+.trio > div:nth-child(3) h3 { color: var(--sage); }
+.trio p { color: color-mix(in srgb, var(--white) 82%, var(--forest)); }
+@media (max-width: 820px) { .trio { grid-template-columns: 1fr; } .trio > div + div { padding-left: 0; border-left: 0; border-top: 2px solid color-mix(in srgb, var(--white) 18%, transparent); } }
+
+/* steps */
+.steps ol { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; counter-reset: s; }
+.steps li { counter-increment: s; position: relative; padding: 26px 22px; border-radius: var(--r); background: var(--white); border: 2px solid var(--sage); display: grid; gap: 8px; align-content: start; }
+.steps li::before { content: counter(s); font: 800 2.6rem/1 var(--display); color: var(--terra); }
+.steps li p { color: var(--muted); font-size: 0.98rem; }
+.steps li:first-child { background: var(--gold-soft); border-color: var(--gold); }
+@media (max-width: 900px) { .steps ol { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .steps ol { grid-template-columns: 1fr; } }
+
+/* packages */
+.packages { background: var(--white); }
+.pk-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.pk { border-radius: var(--r); padding: 26px 22px; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: 12px; background: var(--paper); border: 2px solid transparent; }
+.pk .tier { font: 800 0.8rem/1 var(--body); letter-spacing: .14em; text-transform: uppercase; }
+.pk .price { font: 800 2.3rem/1 var(--display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.pk .price small { font: 600 0.95rem/1 var(--body); color: var(--muted); letter-spacing: 0; }
+.pk .when { font-weight: 700; color: var(--forest); }
+.pk p { color: var(--muted); font-size: 0.96rem; }
+.pk .fine { font-size: 0.85rem; color: var(--muted); border-top: 1px dashed color-mix(in srgb, var(--forest) 25%, transparent); padding-top: 12px; }
+.pk.bronze .tier { color: #9A5B35; }
+.pk.silver .tier { color: #6C7A75; }
+.pk.gold { background: var(--forest); color: var(--white); position: relative; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(31,74,58,.28); }
+.pk.gold .tier, .pk.gold .when { color: var(--gold); }
+.pk.gold p, .pk.gold .price small, .pk.gold .fine { color: color-mix(in srgb, var(--white) 78%, var(--forest)); }
+.pk.gold .fine { border-top-color: color-mix(in srgb, var(--white) 25%, transparent); }
+.pk.gold .flag { position: absolute; top: -14px; right: 16px; background: var(--gold); color: var(--ink); font: 700 1.15rem/1 var(--hand); padding: 6px 12px; border-radius: 999px; transform: rotate(3deg); }
+.pk.platinum { border-color: var(--terra-soft); }
+.pk.platinum .tier { color: var(--terra); }
+.pk-note { margin-top: 26px; color: var(--muted); font-size: 0.95rem; max-width: 70ch; }
+@media (max-width: 980px) { .pk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pk.gold { transform: none; } }
+@media (max-width: 540px) { .pk-grid { grid-template-columns: 1fr; } }
+
+/* words */
+.words { background: var(--terra); color: var(--white); }
+.words .eyebrow { color: var(--gold-soft); }
+.big-quote { font: 800 clamp(3rem, 10vw, 7rem)/0.95 var(--display); letter-spacing: -0.04em; color: var(--white); }
+.big-quote + .who { margin-top: 18px; font: 700 1.6rem/1 var(--hand); color: var(--gold-soft); }
+.wq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 56px; }
+.wq { background: color-mix(in srgb, var(--white) 12%, var(--terra)); border-radius: var(--r); padding: 26px; display: grid; gap: 14px; }
+.wq p { font-size: 1.08rem; }
+.wq .who { font: 700 1.4rem/1 var(--hand); color: var(--gold-soft); }
+@media (max-width: 720px) { .wq-grid { grid-template-columns: 1fr; } }
+
+/* about */
+.about .grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 56px; align-items: center; }
+.portrait { aspect-ratio: 4/5; max-width: 100%; border-radius: 200px 200px var(--r) var(--r); background: linear-gradient(160deg, var(--gold) 0%, var(--terra) 100%); position: relative; display: grid; place-items: end center; padding: 28px; overflow: hidden; }
+.portrait .ph { font: 700 1.3rem/1.2 var(--hand); color: var(--white); text-align: center; background: color-mix(in srgb, var(--forest) 70%, transparent); padding: 10px 16px; border-radius: 12px; }
+.portrait .mono { position: absolute; inset: 0; display: grid; place-items: center; font: 800 9rem/1 var(--display); color: color-mix(in srgb, var(--white) 30%, transparent); letter-spacing: -0.06em; }
+.about .copy { display: grid; gap: 18px; font-size: 1.08rem; color: var(--muted); }
+.about .copy h2 { color: var(--forest); }
+.values { display: flex; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 820px) { .about .grid { grid-template-columns: 1fr; } .portrait { max-width: 380px; } }
+
+/* faq */
+.faq { background: var(--sage); }
+.faq-list { display: grid; gap: 10px; max-width: 820px; }
+details { background: var(--white); border-radius: 14px; padding: 0 22px; }
+summary { cursor: pointer; list-style: none; padding: 20px 0; font: 700 1.08rem/1.3 var(--body); display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font: 800 1.6rem/1 var(--display); color: var(--terra); transition: transform .2s; flex: none; }
+details[open] summary::after { transform: rotate(45deg); }
+details p { padding-bottom: 20px; color: var(--muted); }
+
+/* contact */
+.contact { background: var(--forest); color: var(--white); text-align: left; }
+.contact .grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+.contact h2 { font-size: clamp(2.4rem, 6vw, 4.4rem); }
+.contact h2 span { color: var(--gold); }
+.contact .sub { margin-top: 18px; font-size: 1.15rem; color: color-mix(in srgb, var(--white) 80%, var(--forest)); max-width: 40ch; }
+.card { background: var(--paper); color: var(--ink); border-radius: 22px; padding: 28px; display: grid; gap: 16px; }
+.line { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding: 14px 16px; border-radius: 12px; background: var(--white); }
+.line .lbl { font: 700 0.75rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--terra); }
+.line .val { font: 700 1.1rem/1.2 var(--body); user-select: all; word-break: break-all; }
+.copy-btn { background: var(--sage); color: var(--forest); border: 0; border-radius: 999px; padding: 8px 14px; font: 700 0.85rem/1 var(--body); cursor: pointer; }
+.card .hand { font-size: 1.5rem; color: var(--moss); }
+@media (max-width: 820px) { .contact .grid { grid-template-columns: 1fr; } }
+
+footer { background: var(--ink); color: color-mix(in srgb, var(--white) 70%, var(--ink)); font-size: 0.9rem; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 28px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0s !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+
+<div role="note" style="background:#18241E;color:#fff;font:600 14px/1.4 system-ui,sans-serif;padding:10px 16px;text-align:center">Archived first draft for reference only. Pricing, policies and colors are out of date: see index.html (Hahn &amp; Co.) and solo.html.</div>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">Emily Hahn <span>PA</span></a>
+    <nav aria-label="Main">
+      <a href="#help">What I do</a>
+      <a href="#packages">Packages</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQs</a>
+      <a class="btn btn-gold btn-small" href="#hello">Grab coffee</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" style="padding-block:0">
+  <div class="wrap">
+    <div>
+      <div class="words3">
+        <span class="chip chip-gold">Intuitive</span>
+        <span class="chip chip-terra">Authentic</span>
+        <span class="chip chip-sage">Visionary</span>
+      </div>
+      <h1>Your life, minus the <em>mess.</em></h1>
+      <p class="lede">You worked hard for this life. I'm here so you can actually enjoy it. I take the tasks you don't technically need to do yourself, and I turn the chaos into a system that just makes sense.</p>
+      <div class="ctas">
+        <a class="btn btn-gold" href="#hello">Let's grab coffee →</a>
+        <a class="btn btn-ghost" href="#packages">See packages</a>
+      </div>
+      <p class="where">Personal assistant · Austin, Texas · homes &amp; small businesses</p>
+    </div>
+
+    <div class="board-wrap">
+      <div class="board" id="board" aria-label="A messy to-do list being sorted into Home, Errands and Schedule">
+        <div class="col-head" style="left:3%;--c:var(--gold)">Home</div>
+        <div class="col-head" style="left:35.5%;--c:var(--terra)">Errands</div>
+        <div class="col-head" style="left:68%;--c:var(--moss)">Schedule</div>
+
+        <div class="note" style="--bg:var(--gold-soft);--cx:6%;--cy:10%;--cr:-9deg;--sx:3%;--sy:16%;--d:.00s"><s>fold the laundry mountain</s></div>
+        <div class="note" style="--bg:var(--terra-soft);--cx:52%;--cy:6%;--cr:7deg;--sx:35.5%;--sy:16%;--d:.06s"><s>Costco run</s></div>
+        <div class="note" style="--bg:var(--sage);--cx:30%;--cy:30%;--cr:-4deg;--sx:68%;--sy:16%;--d:.12s"><s>book the vet</s></div>
+        <div class="note" style="--bg:var(--gold-soft);--cx:66%;--cy:34%;--cr:12deg;--sx:3%;--sy:38%;--d:.18s"><s>the fridge. just… the fridge</s></div>
+        <div class="note" style="--bg:var(--terra-soft);--cx:2%;--cy:42%;--cr:6deg;--sx:35.5%;--sy:38%;--d:.24s"><s>return the Amazon pile</s></div>
+        <div class="note" style="--bg:var(--sage);--cx:40%;--cy:56%;--cr:-11deg;--sx:68%;--sy:38%;--d:.30s"><s>RSVP to 3 things</s></div>
+        <div class="note" style="--bg:var(--gold-soft);--cx:14%;--cy:68%;--cr:-6deg;--sx:3%;--sy:60%;--d:.36s"><s>garage?? 😬</s></div>
+        <div class="note" style="--bg:var(--terra-soft);--cx:64%;--cy:62%;--cr:9deg;--sx:35.5%;--sy:60%;--d:.42s"><s>dry cleaning pickup</s></div>
+        <div class="note" style="--bg:var(--sage);--cx:38%;--cy:16%;--cr:15deg;--sx:68%;--sy:60%;--d:.48s"><s>plan Mom's birthday</s></div>
+
+        <div class="status" id="status">it's too much pressure.</div>
+      </div>
+      <div class="board-ctl">
+        <p>Sound familiar? Hit the button.</p>
+        <button class="btn toggle btn-small" id="toggle" type="button" aria-pressed="false">✨ Make it make sense</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESSURE -->
+<section class="pressure">
+  <div class="wrap grid">
+    <blockquote>"It's too much pressure."<br><span>Then let's take some off.</span></blockquote>
+    <div class="copy">
+      <p>Here's what I hear all the time: <strong>you're doing great at the big stuff</strong>, and the little stuff is quietly burying you. The errands. The pile by the door. The calendar that lives in three places.</p>
+      <p>None of it is hard. It's just <strong>endless</strong>. And it's eating the hours you meant to spend on your people, your work and yourself.</p>
+      <p>That's where I come in. I clean up the mess, build a system that fits how you actually live, and keep it running. You get your time back.</p>
+      <p class="sig">— Emily</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I DO -->
+<section class="plates" id="help">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">What I take off your plate</span>
+      <h2>All the things you don't technically need to do.</h2>
+      <p>Hands-on help and behind-the-scenes help, for your home and your business. If it's on the list and it's not yours to carry, hand it over.</p>
+    </div>
+    <div class="plate-grid">
+      <div class="plate">
+        <div class="ico" style="--c:var(--terra)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18l-2 12H5z"/><path d="M8 7a4 4 0 0 1 8 0"/></svg></div>
+        <h3>Errands &amp; runs</h3>
+        <p>Groceries, returns, pickups, drop-offs, the post office line. I handle purchases and they show up on your invoice.</p>
+      </div>
+      <div class="plate">
+        <div class="ico" style="--c:var(--moss)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div>
+        <h3>Organizing</h3>
+        <p>Closets, pantries, garages, offices, and yes, the fridge. Spaces that work and stay that way.</p>
+        <span class="tag">my favorite thing</span>
+      </div>
+      <div class="plate">
+        <div class="ico" style="--c:var(--gold)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+        <h3>Schedules &amp; to-do lists</h3>
+        <p>Appointments booked, calendars synced, the running list finally tamed and actually getting done.</p>
+      </div>
+      <div class="plate">
+        <div class="ico" style="--c:var(--forest)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div>
+        <h3>The house "floof"</h3>
+        <p>A general tidy: laundry folded, beds made, surfaces cleared. Not a deep clean, just the reset that makes home feel like home.</p>
+      </div>
+      <div class="plate">
+        <div class="ico" style="--c:var(--terra)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.6 6.3L21 9l-5 4.4L17.5 20 12 16.7 6.5 20 8 13.4 3 9l6.4-.7z"/></svg></div>
+        <h3>Events &amp; projects</h3>
+        <p>Retreat logistics, parties, the half-finished project in the spare room. I'll get it over the finish line.</p>
+      </div>
+      <div class="plate">
+        <div class="ico" style="--c:var(--moss)"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+        <h3>Business support</h3>
+        <p>Inventory, stockroom order, customer-facing help and the admin that piles up behind the counter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">How I work</span>
+      <h2>Chaos in. Total system sense out.</h2>
+      <p>I grew up in a big family where many hands made light work. I've been helping people for as long as I can remember. Now it's my whole job.</p>
+    </div>
+    <div class="trio">
+      <div>
+        <h3>Intuitive</h3>
+        <p>I notice what needs doing before you have to say it. You won't have to manage me. That would defeat the point.</p>
+      </div>
+      <div>
+        <h3>Authentic</h3>
+        <p>No corporate polish. I'm a real person who shows up, tells you the truth and genuinely cares how your week goes.</p>
+      </div>
+      <div>
+        <h3>Visionary</h3>
+        <p>I see the system hiding in the mess, then build it: where things live, what happens when, and who handles it. (Me.)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Getting started</span>
+      <h2>It starts with coffee.</h2>
+      <p>No pressure, no pitch. We talk, and then we try it for a month to make sure it fits.</p>
+    </div>
+    <ol>
+      <li><h3>Coffee date</h3><p>Tell me what's piling up. I'll listen, ask good questions and start spotting the system.</p></li>
+      <li><h3>First shift</h3><p>I dive in on the thing that's bugging you most, so you can see how I work.</p></li>
+      <li><h3>One-month trial</h3><p>We run your package for a month at a discounted trial rate. Real help, real results.</p></li>
+      <li><h3>We make it official</h3><p>If it's a fit, we sign an agreement and you get a standing weekly calendar invite.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="packages" id="packages">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Packages</span>
+      <h2>Pick your level of peace.</h2>
+      <p>Weekly packages get a reserved slot on my calendar. Extra time is billed in 15-minute increments, so you only pay for what you use.</p>
+    </div>
+    <div class="pk-grid">
+      <div class="pk bronze">
+        <span class="tier">Bronze</span>
+        <div class="price">$50<small>/hr</small></div>
+        <span class="when">As needed</span>
+        <p>Flexible, on-demand help for a quick errand or a one-off project. No weekly commitment.</p>
+        <span class="fine">15-min increments · subject to availability</span>
+      </div>
+      <div class="pk silver">
+        <span class="tier">Silver</span>
+        <div class="price">$100<small>/wk</small></div>
+        <span class="when">1 hour weekly</span>
+        <p>A dedicated hour to keep the to-do list, the schedule and the small stuff under control.</p>
+        <span class="fine">Then $45/hr in 15-min increments</span>
+      </div>
+      <div class="pk gold">
+        <span class="flag">most loved</span>
+        <span class="tier">Gold</span>
+        <div class="price">$135<small>/wk</small></div>
+        <span class="when">3 hours weekly</span>
+        <p>Room to clear the backlog, tidy the house and actually get ahead. The sweet spot for busy people.</p>
+        <span class="fine">Then $45/hr in 15-min increments</span>
+      </div>
+      <div class="pk platinum">
+        <span class="tier">Platinum</span>
+        <div class="price">$225<small>/wk</small></div>
+        <span class="when">5 hours weekly</span>
+        <p>Home, errands, unfinished projects and business support, with room for whatever pops up.</p>
+        <span class="fine">Then $45/hr in 15-min increments</span>
+      </div>
+    </div>
+    <p class="pk-note">Vehicle errands are $0.70/mile and parking is reimbursed. I front purchases under $200 and add them to your weekly QuickBooks invoice.</p>
+  </div>
+</section>
+
+<!-- WORDS -->
+<section class="words">
+  <div class="wrap">
+    <span class="eyebrow">Kind words</span>
+    <p class="big-quote" style="margin-top:18px">"She just gets it."</p>
+    <p class="who">Samantha Bove, on a last-minute Reiki retreat</p>
+    <div class="wq-grid">
+      <div class="wq">
+        <p>Took on inventory and organization, was a warm, friendly presence with our customers, and turns out she's a fantastic baker too.</p>
+        <span class="who">The Casler family</span>
+      </div>
+      <div class="wq">
+        <p>Brought real organization to my work life. Reliable, positive and always on top of it.</p>
+        <span class="who">Steven Sanchez</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap grid">
+    <div class="portrait">
+      <div class="mono">EH</div>
+      <span class="ph">your favorite photo of Emily goes here</span>
+    </div>
+    <div class="copy">
+      <span class="eyebrow">Hi, I'm Emily</span>
+      <h2>I bring ease (and a little magic) to everyday life.</h2>
+      <p>I've been helping people for as long as I can remember. In early 2024 I made it official and started this business to simplify life for busy people in Austin.</p>
+      <p>My mission is simple: give you more time and less stress, one thoughtful task at a time. I'm all about improving the human experience, and that starts with yours.</p>
+      <div class="values" aria-label="Core values">
+        <span class="chip chip-sage">Authenticity</span>
+        <span class="chip chip-gold">Empathy</span>
+        <span class="chip chip-terra">Communication</span>
+        <span class="chip chip-sage">Integrity</span>
+        <span class="chip chip-gold">Time</span>
+        <span class="chip chip-terra">Respect</span>
+        <span class="chip chip-sage">Appreciation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">The fine print, made friendly</span>
+      <h2>Questions? Good.</h2>
+    </div>
+    <div class="faq-list">
+      <details open><summary>Do you clean?</summary><p>Not traditional cleaning, so no toilets or showers. I do a general tidy, which I call a "floof": organizing, folding laundry, making beds and clearing surfaces.</p></details>
+      <details><summary>How does booking work?</summary><p>Silver, Gold and Platinum clients get a standing weekly Google Calendar invite. Everyone else books by text. New clients always start with a coffee date.</p></details>
+      <details><summary>What if I need to cancel?</summary><p>More than a week out is free. Within a week is $45. Under 24 hours is charged as the full shift, unless it's an emergency.</p></details>
+      <details><summary>Can I add extra hours?</summary><p>Yes, when I'm available. Extra time is billed at the standard hourly rate in 15-minute increments.</p></details>
+      <details><summary>How do I pay?</summary><p>I send a weekly invoice through QuickBooks and you pay however you like. Purchases under $200 go on the invoice; for bigger ones you provide the card.</p></details>
+      <details><summary>Do you work weekends?</summary><p>Weekly clients are Monday through Friday. Weekends are possible with notice at weekend rates, though not guaranteed.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="hello">
+  <div class="wrap grid">
+    <div>
+      <h2>Ready to breathe <span>again?</span></h2>
+      <p class="sub">Let's grab a coffee and talk about what's piling up. You bring the list. I'll bring the system.</p>
+    </div>
+    <div class="card">
+      <div class="line"><div><div class="lbl">Call or text</div><div class="val" id="phone">(860) 500-0823</div></div><button class="copy-btn" type="button" data-copy="phone" aria-label="Copy phone number">Copy</button></div>
+      <div class="line"><div><div class="lbl">Email</div><div class="val" id="email">emilyhahnpa@gmail.com</div></div><button class="copy-btn" type="button" data-copy="email" aria-label="Copy email address">Copy</button></div>
+      <p class="hand">Austin, Texas · Mon–Fri</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Emily Hahn, Personal Assistant · Austin, TX</span>
+    <span>Intuitive · Authentic · Visionary</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var board = document.getElementById('board');
+  var btn = document.getElementById('toggle');
+  var status = document.getElementById('status');
+  function set(sorted) {
+    board.classList.toggle('sorted', sorted);
+    btn.setAttribute('aria-pressed', String(sorted));
+    btn.textContent = sorted ? '↺ Back to the chaos' : '✨ Make it make sense';
+    status.textContent = sorted ? 'ahh. system sense.' : "it's too much pressure.";
+  }
+  btn.addEventListener('click', function () { set(!board.classList.contains('sorted')); });
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) setTimeout(function () { if (btn.getAttribute('aria-pressed') === 'false') set(true); }, 1800);
+
+  document.querySelectorAll('.copy-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var el = document.getElementById(b.dataset.copy);
+      var txt = el.textContent;
+      var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(done, function () { select(el, b); });
+      } else { select(el, b); }
+    });
+  });
+  function select(el, b) { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} if (b) { b.textContent = ok ? 'Copied' : 'Selected'; setTimeout(function () { b.textContent = 'Copy'; }, 1500); } }
+})();
+</script>
+</body>
+</html>
